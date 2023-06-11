@@ -6,17 +6,13 @@ import Filter from './Filter/Filter';
 import css from './App.module.css';
 
 const App = () => {
-  const [contacts, setContacts] = useState([]);
-  const [filter, setFilter] = useState('');
-
-  useEffect(() => {
+  const [contacts, setContacts] = useState(() => {
     const storedContacts = localStorage.getItem('contacts');
     const parsedContacts = JSON.parse(storedContacts);
 
-    if (parsedContacts) {
-      setContacts(parsedContacts);
-    }
+    return parsedContacts;
   }, []);
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
